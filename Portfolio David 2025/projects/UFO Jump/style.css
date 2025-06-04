@@ -1,0 +1,9 @@
+body {
+    background-image: url("images/background.jpg");
+}
+
+canvas {
+    border: 10px solid #ffffff;
+    display: block;
+    margin: 200px auto;
+}
