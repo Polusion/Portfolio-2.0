@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     from_name: name,
                     from_email: email,
                     message: message,
-                    to_email: "david.goedhals@student.alfa-college.nl"
+                    to_email: "david.goedhals@student.alfa-college.nl",
+                    time: new Date().toLocaleString()
                 }
             )
             .then(function() {
