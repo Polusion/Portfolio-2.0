@@ -36,6 +36,9 @@ main {
     min-height: 100vh;
     max-width: 1000px;
     width: 100%;
+    box-shadow: -20px 0 30px -20px rgba(0, 0, 0, 0.2),
+                20px 0 30px -20px rgba(0, 0, 0, 0.2),
+                0 20px 30px -20px rgba(0, 0, 0, 0.2);
 }
 
 a {
@@ -325,9 +328,9 @@ textarea {
 /* Footer Styles */
 .footer {
     background-color: #EEEFE0;
-    padding: 3rem 2rem 1rem;
-    margin-top: 4rem;
-    border-top: 1px solid #D1D8BE;
+    padding: 3rem 0 1rem;
+    margin-top: 2rem;
+    box-shadow: 0 -20px 30px -20px rgba(0, 0, 0, 0.2);
     width: 100%;
     margin-left: 0;
     margin-right: 0;
