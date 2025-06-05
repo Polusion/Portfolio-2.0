@@ -24,7 +24,7 @@ nav {
 }
 
 .navbar-nav {
-    padding-left: 2rem;
+    padding-left: 1rem;
 }
 
 main {
@@ -168,8 +168,16 @@ textarea {
   font-size: 1em;
   outline: none;
   resize: none;
-  min-height: 100px;
+  min-height: 10px;
   overflow: hidden;
+}
+
+textarea {
+    height: 30px;
+}
+
+#bericht {
+    padding-top: 50px;
 }
 
 .full-width {
@@ -517,9 +525,12 @@ textarea {
     color: #EEEFE0;
     padding: 10px 20px;
     border-radius: 5px;
-    font-size: 0.9rem;
     z-index: 1000;
     animation: fadeInOut 2s ease-in-out;
+}
+
+.copy-notification.error {
+    background-color: #ff6b6b;
 }
 
 @keyframes fadeInOut {

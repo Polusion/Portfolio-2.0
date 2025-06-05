@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Create and show notification
                 const notification = document.createElement('div');
                 notification.className = 'copy-notification';
-                notification.textContent = 'Copied to clipboard!';
+                notification.textContent = 'Gekopieerd naar klembord!';
                 document.body.appendChild(notification);
 
                 // Remove notification after 2 seconds
@@ -69,26 +69,54 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            // Here you would typically send the data to a server
-            // For now, we'll just show the notification
-            console.log('Form submitted:', { name, email, message });
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Verzenden...';
+            submitBtn.disabled = true;
 
-            // Show success notification
-            const notification = document.createElement('div');
-            notification.className = 'copy-notification';
-            notification.textContent = 'Message sent successfully!';
-            document.body.appendChild(notification);
+            // Send email using EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: "david.goedhals@student.alfa-college.nl"
+            })
+            .then(function() {
+                // Show success notification
+                const notification = document.createElement('div');
+                notification.className = 'copy-notification';
+                notification.textContent = 'Bericht succesvol verzonden!';
+                document.body.appendChild(notification);
 
-            // Remove notification after 2 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 2000);
+                // Remove notification after 2 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
 
-            // Clear form
-            contactForm.reset();
-            if (textarea) {
-                textarea.style.height = 'auto';
-            }
+                // Clear form
+                contactForm.reset();
+                if (textarea) {
+                    textarea.style.height = 'auto';
+                }
+            })
+            .catch(function(error) {
+                // Show error notification
+                const notification = document.createElement('div');
+                notification.className = 'copy-notification error';
+                notification.textContent = 'Er is een fout opgetreden. Probeer het later opnieuw.';
+                document.body.appendChild(notification);
+
+                // Remove notification after 2 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
+            })
+            .finally(function() {
+                // Reset button state
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            });
         });
     }
 });

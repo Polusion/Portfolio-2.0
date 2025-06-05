@@ -128,7 +128,7 @@
                         <input type="email" id="email" />
                     </div>
                 </div>
-                <div class="input-group full-width">
+                <div class="input-group full-width" id="bericht">
                     <label for="message">Bericht</label>
                     <textarea id="message" rows="4"></textarea>
                 </div>
@@ -173,6 +173,12 @@
     </footer>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+    </script>
 </body>
 
 <!-- BOOTSTRAP LINK -->
