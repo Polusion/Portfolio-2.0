@@ -65,25 +65,63 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Validate form fields
+            let isValid = true;
+            let errorMessage = '';
+
+            // Name validation
+            if (!name) {
+                isValid = false;
+                errorMessage = 'Vul alstublieft uw naam in.';
+            }
+            // Email validation
+            else if (!email) {
+                isValid = false;
+                errorMessage = 'Vul alstublieft uw e-mailadres in.';
+            }
+            else if (!isValidEmail(email)) {
+                isValid = false;
+                errorMessage = 'Vul alstublieft een geldig e-mailadres in.';
+            }
+            // Message validation
+            else if (!message) {
+                isValid = false;
+                errorMessage = 'Vul alstublieft een bericht in.';
+            }
+
+            if (!isValid) {
+                // Show error notification
+                const notification = document.createElement('div');
+                notification.className = 'copy-notification error';
+                notification.textContent = errorMessage;
+                document.body.appendChild(notification);
+
+                // Remove notification after 2 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
+                return;
+            }
 
             // Show loading state
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'Verzenden...';
             submitBtn.disabled = true;
-            console.log(Date.now());
+
             // Send email using EmailJS
             emailjs.send(
-                "service_1iwm80g", // Replace with your EmailJS service ID (found in Email Services)
-                "template_udqi47f", // Replace with your EmailJS template ID (found in Email Templates)
+                "service_1iwm80g",
+                "template_udqi47f",
                 {
-                    name: name,
-                    date: Date.now(),
-                    email: email,
+                    from_name: name,
+                    from_email: email,
                     message: message,
+                    to_email: "david.goedhals@student.alfa-college.nl"
                 }
             )
             .then(function() {
@@ -123,5 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = false;
             });
         });
+    }
+
+    // Email validation function
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 });
