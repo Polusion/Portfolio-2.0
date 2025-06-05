@@ -74,14 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'Verzenden...';
             submitBtn.disabled = true;
-
+            console.log(Date.now());
             // Send email using EmailJS
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-                from_name: name,
-                from_email: email,
-                message: message,
-                to_email: "david.goedhals@student.alfa-college.nl"
-            })
+            emailjs.send(
+                "service_1iwm80g", // Replace with your EmailJS service ID (found in Email Services)
+                "template_udqi47f", // Replace with your EmailJS template ID (found in Email Templates)
+                {
+                    name: name,
+                    date: Date.now(),
+                    email: email,
+                    message: message,
+                }
+            )
             .then(function() {
                 // Show success notification
                 const notification = document.createElement('div');
@@ -101,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(function(error) {
+                console.error('EmailJS error:', error);
                 // Show error notification
                 const notification = document.createElement('div');
                 notification.className = 'copy-notification error';
