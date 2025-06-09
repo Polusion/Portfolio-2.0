@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Clipboard functionality
-    const contactLinks = document.querySelectorAll('.contact-info a');
+    const contactLinks = document.querySelectorAll('.contact-info a, .email-link');
     contactLinks.forEach(link => {
         link.addEventListener('click', async function(e) {
             e.preventDefault();
